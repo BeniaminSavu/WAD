@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -26,15 +27,15 @@ public class UserModel extends Model {
 	private String email;
 	private String password;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userTokenId")
 	private UserTokenModel userToken;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "roleId")
 	private RoleModel role;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<TransactionModel> transactions = new ArrayList<TransactionModel>();
 
 	public String getFirstName() {
@@ -93,11 +94,11 @@ public class UserModel extends Model {
 		this.role = role;
 	}
 
-	public List<TransactionModel> getCarts() {
+	public List<TransactionModel> getTransactions() {
 		return transactions;
 	}
 
-	public void setCarts(List<TransactionModel> transactions) {
+	public void setTransactions(List<TransactionModel> transactions) {
 		this.transactions = transactions;
 	}
 

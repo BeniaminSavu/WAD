@@ -5,5 +5,5 @@
 http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
   <import resource="classpath:persistence-config.xml"/>
-
+  <import resource="classpath:service-config.xml"/>
 </beans>

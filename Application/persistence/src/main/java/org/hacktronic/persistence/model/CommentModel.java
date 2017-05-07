@@ -15,6 +15,7 @@ public class CommentModel extends Model{
 
 	private String message;
 	private String title;
+	
 	public ProductModel getProduct() {
 		return product;
 	}
