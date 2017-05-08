@@ -19,4 +19,11 @@ public interface TransactionService {
 
 	List<TransactionModel> getPurchesedTransactions();
 
+	void addProductToTransaction(int productId);
+	
+	void removeProductFromTransaction(int productId);
+	
+	void clearAllProducts();
+
+	void checkout();
 }
