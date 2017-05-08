@@ -19,16 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommentController {
 
 	@Autowired
-	private ProductService productService;
-
-	@Autowired
 	private CommentService commentService;
 
 	@PostMapping("/add/{productId}")
 	public String addComment(@PathVariable("productId") int productId, @RequestBody CommentModel newComment) {
-		ProductModel product = productService.findProductById(productId);
-		newComment.setProduct(product);
-		commentService.create(newComment);
+		commentService.create(newComment, productId);
 		return "dummy";
 	}
 

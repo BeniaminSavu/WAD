@@ -2,6 +2,7 @@ package org.hacktronic.service;
 
 import java.util.List;
 
+import org.hacktronic.persistence.model.ProductModel;
 import org.hacktronic.persistence.model.TransactionModel;
 import org.hacktronic.persistence.model.UserModel;
 import org.hacktronic.persistence.repository.TransactionRepository;
@@ -17,6 +18,9 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ProductService productService;
 
 	public TransactionModel create(TransactionModel transaction) {
 		return transactionRepository.save(transaction);
@@ -47,4 +51,49 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionRepository.findByUserAndApproval(user, Cart.STATUS_FINISHED);
 	}
 
+	public void addProductToTransaction(int productId){
+		TransactionModel transaction = getActiveTransaction();
+		if (transaction == null) {
+			int userId = userService.getUserId();
+			UserModel user = userService.findById(userId);
+			transaction = create(new TransactionModel(user));
+		}
+		ProductModel product = productService.findProductById(productId);
+		if (product == null) {
+			throw new IllegalArgumentException("product is null");
+		}
+		transaction.addTransactionItem(product);
+		update(transaction);
+	}
+
+	@Override
+	public void removeProductFromTransaction(int productId) {
+		TransactionModel transaction = getActiveTransaction();
+		ProductModel product = productService.findProductById(productId);
+		if (product == null) {
+			throw new IllegalArgumentException("product is null");
+		}
+		transaction.removeTransactionItem(product);
+		update(transaction);
+		
+	}
+
+	@Override
+	public void clearAllProducts() {
+		TransactionModel transaction = getActiveTransaction();
+		transaction.getProducts().clear();
+		transaction.setGrandTotal(0);
+		update(transaction);
+		
+	}
+
+	@Override
+	public void checkout() {
+		TransactionModel transaction = getActiveTransaction();
+		transaction.setApproval("FINISHED");
+		update(transaction);
+		int userId = userService.getUserId();
+		create(new TransactionModel(userService.findById(userId)));
+	}
+	
 }

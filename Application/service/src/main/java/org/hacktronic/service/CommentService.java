@@ -4,6 +4,6 @@ import org.hacktronic.persistence.model.CommentModel;
 
 public interface CommentService {
 
-	void create(CommentModel comment);
+	void create(CommentModel comment, int productId);
 
 }
