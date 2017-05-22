@@ -1,7 +1,15 @@
 package org.hacktronic.service.helper;
 
-public interface TokenGenerator {
-	
-	String generateToken();
-	
+import java.util.UUID;
+
+public class TokenGenerator implements Generator {
+
+	public String generateToken() {
+		String token;
+
+		UUID uuid = UUID.randomUUID();
+		token = uuid.toString();
+		return token;
+	}
+
 }
