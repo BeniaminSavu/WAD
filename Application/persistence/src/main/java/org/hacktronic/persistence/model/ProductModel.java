@@ -1,6 +1,7 @@
 package org.hacktronic.persistence.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -22,6 +23,9 @@ public class ProductModel extends Model {
 
 	private String description;
 	private int price;
+	private int unitsInStock;
+	private String manufacturer;
+	private Date date;
 
 	public String getName() {
 		return name;
@@ -61,6 +65,30 @@ public class ProductModel extends Model {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public int getUnitsInStock() {
+		return unitsInStock;
+	}
+
+	public void setUnitsInStock(int unitsInStock) {
+		this.unitsInStock = unitsInStock;
+	}
+
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
 	}
 
 }

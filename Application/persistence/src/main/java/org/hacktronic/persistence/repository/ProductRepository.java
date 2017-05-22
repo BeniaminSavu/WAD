@@ -14,4 +14,6 @@ public interface ProductRepository extends CrudRepository<ProductModel, Integer>
 	List<ProductModel> findByCategory(String category);
 
 	ProductModel findById(int id);
+	
+	List<ProductModel> findFirst6ByOrderByDateDesc();
 }

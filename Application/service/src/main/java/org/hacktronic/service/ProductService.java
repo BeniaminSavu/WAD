@@ -3,6 +3,7 @@ package org.hacktronic.service;
 import java.util.List;
 
 import org.hacktronic.persistence.model.ProductModel;
+import org.hacktronic.service.data.ProductInfo;
 
 
 public interface ProductService {
@@ -16,5 +17,7 @@ public interface ProductService {
 	ProductModel findProductById(int id);
 
 	void removeById(int id);
+
+	List<ProductInfo> latestProducts();
 
 }

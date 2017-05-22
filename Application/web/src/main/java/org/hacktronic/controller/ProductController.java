@@ -1,7 +1,11 @@
 package org.hacktronic.controller;
 
+import java.util.List;
+
+import org.hacktronic.controller.response.NewProductResponse;
 import org.hacktronic.persistence.model.ProductModel;
 import org.hacktronic.service.ProductService;
+import org.hacktronic.service.data.ProductInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/product")
+@RequestMapping("/hacktronic/product")
 public class ProductController {
 
 	@Autowired
@@ -42,9 +46,17 @@ public class ProductController {
 	}
 
 	@PostMapping("/add")
-	public String processNewCourseForm(@RequestBody ProductModel newProduct) {
+	public NewProductResponse processNewProductForm(@RequestBody ProductModel newProduct) {
 		productService.addProduct(newProduct);
-		return "dummy";
+		NewProductResponse response = new NewProductResponse();
+		response.setMessage("Product added");
+		response.setStatus(200);
+		return response;
+	}
+	
+	@GetMapping("/latest")
+	public List<ProductInfo> getLatestProducts() {
+		return productService.latestProducts();
 	}
 
 }

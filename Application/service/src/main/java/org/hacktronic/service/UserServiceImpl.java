@@ -13,8 +13,12 @@ import org.hacktronic.persistence.model.UserTokenModel;
 import org.hacktronic.persistence.repository.RoleRepository;
 import org.hacktronic.persistence.repository.UserRepository;
 import org.hacktronic.persistence.repository.UserTokenRepository;
-import org.hacktronic.service.helper.TokenGenerator;
+import org.hacktronic.service.data.UserFullname;
+import org.hacktronic.service.helper.EmailSender;
+import org.hacktronic.service.helper.Generator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 
@@ -32,13 +36,16 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private TransactionService transactionService;
-	
+
 	@Autowired
-	private TokenGenerator userTokenGenerator;
+	private EmailSender emailSender;
+
+	@Autowired
+	private Generator tokenGenerator;
+
 
 	public void createUser(UserModel user) {
-		String token = userTokenGenerator.generateToken();
-		
+		String token = tokenGenerator.generateToken();
 		RoleModel role = userRoleRepository.findByRole("ROLE_USER");
 		user.setRole(role);
 
@@ -50,6 +57,8 @@ public class UserServiceImpl implements UserService {
 		userToken = userTokenRepository.findByToken(token);
 		user.setUserToken(userToken);
 		userRepository.save(user);
+
+		// emailSender.sendMail(user.getEmail(), token);
 	}
 
 	public boolean verify(String userToken) {
@@ -91,6 +100,16 @@ public class UserServiceImpl implements UserService {
 	public String getUsername() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public UserFullname getFullName() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserModel user = userRepository.findByUsername(auth.getName());
+		UserFullname userData = new UserFullname();
+		userData.setFirstName(user.getFirstName());
+		userData.setLastName(user.getLastName());
+		return userData;
 	}
 
 }
