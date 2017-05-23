@@ -5,6 +5,7 @@ import java.util.List;
 import org.hacktronic.persistence.model.ProductModel;
 import org.hacktronic.persistence.model.TransactionModel;
 import org.hacktronic.persistence.model.UserModel;
+import org.hacktronic.persistence.repository.ProductRepository;
 import org.hacktronic.persistence.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class TransactionServiceImpl implements TransactionService {
 	private UserService userService;
 	
 	@Autowired
-	private ProductService productService;
+	private ProductRepository productRepository;
 
 	public TransactionModel create(TransactionModel transaction) {
 		return transactionRepository.save(transaction);
@@ -58,7 +59,7 @@ public class TransactionServiceImpl implements TransactionService {
 			UserModel user = userService.findById(userId);
 			transaction = create(new TransactionModel(user));
 		}
-		ProductModel product = productService.findProductById(productId);
+		ProductModel product = productRepository.findById(productId);
 		if (product == null) {
 			throw new IllegalArgumentException("product is null");
 		}
@@ -69,7 +70,7 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public void removeProductFromTransaction(int productId) {
 		TransactionModel transaction = getActiveTransaction();
-		ProductModel product = productService.findProductById(productId);
+		ProductModel product = productRepository.findById(productId);
 		if (product == null) {
 			throw new IllegalArgumentException("product is null");
 		}

@@ -30,6 +30,9 @@ public class UserModel extends Model {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userTokenId")
 	private UserTokenModel userToken;
+	
+	@OneToMany(mappedBy = "user")
+	private List<CommentModel> comments = new ArrayList<CommentModel>();
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "roleId")
@@ -37,6 +40,8 @@ public class UserModel extends Model {
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<TransactionModel> transactions = new ArrayList<TransactionModel>();
+	
+	
 
 	public String getFirstName() {
 		return firstName;
@@ -100,6 +105,14 @@ public class UserModel extends Model {
 
 	public void setTransactions(List<TransactionModel> transactions) {
 		this.transactions = transactions;
+	}
+
+	public List<CommentModel> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentModel> comments) {
+		this.comments = comments;
 	}
 
 }
