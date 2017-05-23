@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.hacktronic.persistence.model.ProductModel;
 import org.hacktronic.persistence.repository.ProductRepository;
+import org.hacktronic.service.data.ProductData;
 import org.hacktronic.service.data.ProductInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,16 @@ public class ProductServiceImpl implements ProductService {
 		return products;
 	}
 
-	public ProductModel findProductById(int id) {
-		return productRepository.findById(id);
+	public ProductData findProductById(int id) {
+		ProductModel model =  productRepository.findById(id);
+		ProductData product = new ProductData();
+		product.setName(model.getName());
+		product.setDescription(model.getDescription());
+		product.setManufacturer(model.getManufacturer());
+		product.setPrice(model.getPrice());
+		product.setUnitsInStock(model.getUnitsInStock());
+		
+		return product;
 	}
 
 	public void removeById(int id) {
@@ -54,6 +63,7 @@ public class ProductServiceImpl implements ProductService {
 			productInfo.setName(product.getName());
 			productInfo.setDescription(product.getDescription());
 			productInfo.setPrice(product.getPrice());
+			productInfo.setId(product.getId());
 			productsInfo.add(productInfo);
 		}
 		return productsInfo;

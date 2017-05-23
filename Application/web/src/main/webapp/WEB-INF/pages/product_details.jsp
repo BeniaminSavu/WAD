@@ -22,7 +22,7 @@
 	<div id="header">
 		<div class="container">
 			<div id="welcomeLine" class="row">
-				<div class="span6">
+				<div class="span6" id="userFullName">
 					Welcome!<strong> User</strong>
 				</div>
 				<div class="span6">
@@ -100,9 +100,11 @@
 							</a>
 
 						</div>
-						
+
 						<div class="span6">
 							<h3 id="product-title">Fujifilm FinePix S2950 Digital Camera</h3>
+							<small id="product-manufacturer">- (14MP, 18x Optical
+								Zoom) 3-inch LCD</small>
 							<hr class="soft" />
 							<form class="form-horizontal qtyFrm">
 								<div class="control-group">
@@ -120,14 +122,14 @@
 							<hr class="soft" />
 							<h4 id="product-unitsInStock">100 items in stock</h4>
 							<hr class="soft clr" />
-							<p id="product-description">14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen.
-								Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity
-								ISO6400 at reduced resolution. Tracking Auto Focus. Motion
-								Panorama Mode. Face Detection technology with Blink detection
-								and Smile and shoot mode. 4 x AA batteries not included. WxDxH
-								110.2 ×81.4x73.4mm. Weight 0.341kg (excluding battery and
-								memory card). Weight 0.437kg (including battery and memory
-								card).</p>
+							<p id="product-description">14 Megapixels. 18.0 x Optical
+								Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD
+								movie capture. ISO sensitivity ISO6400 at reduced resolution.
+								Tracking Auto Focus. Motion Panorama Mode. Face Detection
+								technology with Blink detection and Smile and shoot mode. 4 x AA
+								batteries not included. WxDxH 110.2 ×81.4x73.4mm. Weight
+								0.341kg (excluding battery and memory card). Weight 0.437kg
+								(including battery and memory card).</p>
 
 
 							<hr class="soft" />
@@ -135,11 +137,64 @@
 
 						<div class="span9">
 
-							<div id="myTabContent" class="tab-content">
-								<div class="tab-pane fade active in" id="home">
-									<h4>Comments</h4>
+
+							<div class="row">
+								<div class="col-sm-10 col-sm-offset-1" id="logout">
+									<div class="comment-tabs">
+										<ul class="nav nav-tabs" role="tablist">
+											<li class="active"><a href="#comments-logout" role="tab"
+												data-toggle="tab"><h4 class="reviews text-capitalize">Comments</h4></a></li>
+											<li><a href="#add-comment" role="tab" data-toggle="tab"><h4
+														class="reviews text-capitalize">Add comment</h4></a></li>
+										</ul>
+										<div class="tab-content">
+											<div class="tab-pane active" id="comments-logout">
+												<ul class="media-list" id="content-placeholder">
+													<script id="address-template"
+														type="text/x-handlebars-template">
+														{{#each comment}}
+															<li class="media">
+															<div class="media-body">
+																<div class="well well-lg">
+																	<h3 class="media-heading text-uppercase reviews">{{title}}</h3>
+																	<small class="pull-right">{{user}}</small>
+																	<p class="media-comment">{{message}}</p>
+																</div>
+															</div>
+															</li>
+														{{/each}}	
+													</script>
+												</ul>
+											</div>
+											<div class="tab-pane" id="add-comment">
+												<form class="form-horizontal" id="commentForm">
+													<div class="control-group">
+														<label class="control-label">Title</label>
+														<div class="controls">
+															<input type="text" class="form-control" name="title"></input>
+														</div>
+													</div>
+													<div class="control-group">
+														<label for="comment" class="control-label">Comment</label>
+														<div class="controls">
+															<textarea name="message" id="message" rows="5"></textarea>
+														</div>
+													</div>
+												</form>
+												<div class="control-group">
+													<div class="controls">
+														<input onclick="newComment()"
+															class="btn btn-success btn-circle text-uppercase"
+															type="submit" value="Submit Comment" />
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
+
 
 						</div>
 					</div>
@@ -155,9 +210,25 @@
 			<!-- Container End -->
 		</div>
 		<!-- Placed at the end of the document so the pages load faster ============================================= -->
-		<script src=<c:url value="/resource/js/jquery.js"/>
+		<script src=<c:url value="/resource/js/lib/jquery.js"/>
 			type="text/javascript"></script>
-		<script src=<c:url value="/resource/js/bootstrap.min.js"/>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+		<script src=<c:url value="/resource/js/lib/bootstrap.min.js"/>
 			type="text/javascript"></script>
+		<script src=<c:url value="/resource/js/HacktronicAPI.js"/>
+			type="text/javascript"></script>
+		<script src=<c:url value="/resource/js/commonUI.js"/>
+			type="text/javascript"></script>
+		<script src=<c:url value="/resource/js/product_detailsUI.js"/>
+			type="text/javascript"></script>
+
+		<script>
+			$(document).ready(function() {
+				loadProductDetails();
+				loadUserFirstAndLastname();
+				loadComments();
+			});
+		</script>
 </body>
 </html>

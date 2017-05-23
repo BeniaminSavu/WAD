@@ -5,6 +5,7 @@ import java.util.List;
 import org.hacktronic.controller.response.NewProductResponse;
 import org.hacktronic.persistence.model.ProductModel;
 import org.hacktronic.service.ProductService;
+import org.hacktronic.service.data.ProductData;
 import org.hacktronic.service.data.ProductInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,10 +28,9 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	@GetMapping(params = { "id" })
-	public String getProductById(@RequestParam("id") int productId) {
-		productService.findProductById(productId);
-		return "dummy";
+	@GetMapping("/{id}")
+	public ProductData getProductById(@PathVariable("id") int productId) {
+		return productService.findProductById(productId);
 	}
 
 	@GetMapping("/all")
@@ -39,7 +39,7 @@ public class ProductController {
 		return "dummy";
 	}
 
-	@GetMapping("/{category}")
+	@GetMapping("/category")
 	public String viewCoursesByType(@PathVariable("category") String productCategory) {
 		productService.findProductsByCategory(productCategory);
 		return "dummy";

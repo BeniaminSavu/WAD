@@ -98,14 +98,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return auth.getName();
 	}
 
 	@Override
 	public UserFullname getFullName() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserModel user = userRepository.findByUsername(auth.getName());
+		UserModel user = userRepository.findByUsername(getUsername());
 		UserFullname userData = new UserFullname();
 		userData.setFirstName(user.getFirstName());
 		userData.setLastName(user.getLastName());

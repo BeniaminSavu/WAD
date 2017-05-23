@@ -53,14 +53,19 @@ function HacktronicAPI() {
         return doAsyncPost(postURL, user);
 	};
 	
-	this.registerProduct = function(user){
+	this.registerProduct = function(product){
 		var postURL = "/web/hacktronic/product/add";
-        return doAsyncPost(postURL, user);
+        return doAsyncPost(postURL, product);
 	};
 	
 	this.loginUser = function(user){
 		var postURL = "/web/login";
         return doAsyncPost(postURL, user);
+	};
+	
+	this.registerComment = function(comment, productId){
+		var postURL = "/web/hacktronic/comment/add/" + productId;
+		return doAsyncPost(postURL, comment);
 	};
 	
 	this.getUserFirstAndLastname = function(){
@@ -73,6 +78,16 @@ function HacktronicAPI() {
 		return doAsyncGet(apiURL);
 		
 	};
+	
+	this.getProdcutDetails = function(id){
+		var apiURL = "/web/hacktronic/product/" + id;
+		return doAsyncGet(apiURL);
+	};
+	
+	this.getComments = function(productId){
+		var apiURL = "/web/hacktronic/comment/" + productId;
+		return doAsyncGet(apiURL);
+	}
 	
 	
 	HacktronicAPI.instance = this;

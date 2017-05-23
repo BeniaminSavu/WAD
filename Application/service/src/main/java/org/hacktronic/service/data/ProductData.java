@@ -1,19 +1,12 @@
 package org.hacktronic.service.data;
 
-public class ProductInfo {
+public class ProductData {
 
-	private int id;
 	private String name;
+	private String manufacturer;
 	private String description;
 	private int price;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	private int unitsInStock;
 
 	public String getName() {
 		return name;
@@ -21,6 +14,14 @@ public class ProductInfo {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
 	}
 
 	public String getDescription() {
@@ -37,6 +38,14 @@ public class ProductInfo {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public int getUnitsInStock() {
+		return unitsInStock;
+	}
+
+	public void setUnitsInStock(int unitsInStock) {
+		this.unitsInStock = unitsInStock;
 	}
 
 }
