@@ -3,6 +3,7 @@ package org.hacktronic.controller;
 import java.util.List;
 
 import org.hacktronic.controller.response.NewProductResponse;
+import org.hacktronic.controller.response.ProductInfoResponse;
 import org.hacktronic.persistence.model.ProductModel;
 import org.hacktronic.service.ProductService;
 import org.hacktronic.service.data.ProductData;
@@ -39,10 +40,11 @@ public class ProductController {
 		return "dummy";
 	}
 
-	@GetMapping("/category")
-	public String viewCoursesByType(@PathVariable("category") String productCategory) {
-		productService.findProductsByCategory(productCategory);
-		return "dummy";
+	@GetMapping("/type/{category}")
+	public ProductInfoResponse viewCoursesByType(@PathVariable("category") String productCategory) {
+		ProductInfoResponse response = new ProductInfoResponse(); 
+		response.setProducts(productService.findProductsByCategory(productCategory));
+		return response;
 	}
 
 	@PostMapping("/add")

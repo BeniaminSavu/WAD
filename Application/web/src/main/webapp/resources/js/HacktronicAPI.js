@@ -87,8 +87,27 @@ function HacktronicAPI() {
 	this.getComments = function(productId){
 		var apiURL = "/web/hacktronic/comment/" + productId;
 		return doAsyncGet(apiURL);
-	}
+	};
 	
+	this.getProductsByCategory = function(category){
+		var apiURL = "/web/hacktronic/product/type/" + category;
+		return doAsyncGet(apiURL);
+	};
+	
+	this.getShoppingCart = function(){
+		var apiURL = "/web/hacktronic/cart";
+		return doAsyncGet(apiURL);
+	};
+	
+	this.addToCart = function(productId){
+		var apiURL = "/web/hacktronic/cart/add/" + productId;
+		return doAsyncGet(apiURL);
+	};
+	
+	this.deleteCartItem = function(productId){
+		var apiURL = "/web/hacktronic/cart/remove/" + productId;
+		return doAsyncGet(apiURL);
+	}
 	
 	HacktronicAPI.instance = this;
 }

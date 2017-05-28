@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+
 <!-- Bootstrap style --> 
     <link id="callCss" rel="stylesheet" href=<c:url value="/resource/css/bootstrap.min.css"/> media="screen"/>
     <link href=<c:url value="/resource/css/base.css"/> rel="stylesheet" media="screen"/>
@@ -16,6 +17,7 @@
   </head>
 <body>
 <div id="header">
+	<div id="header">
 		<div class="container">
 			<div id="welcomeLine" class="row">
 				<div class="span6" id="userFullName">
@@ -23,9 +25,9 @@
 				</div>
 				<div class="span6">
 					<div class="pull-right">
-						<span class="btn btn-mini">$155.00</span> <a
-							href="product_summary.html"><span
-							class="btn btn-mini btn-primary"><i
+						<span class="btn btn-mini" id="total">$155.00</span> <a
+							href="product_summary.html"><span id="info"
+							class="btn btn-mini btn-primary"><i 
 								class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your
 								cart </span> </a>
 					</div>
@@ -76,50 +78,57 @@
 					<br />
 				</div>
 				<!-- Sidebar end=============================================== -->
-
 	<div class="span9">
     <ul class="breadcrumb">
 		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
-		<li class="active">Products Name</li>
+		<li class="active"> SHOPPING CART</li>
     </ul>
-	<h3> Products Name <small id ="products-available" class="pull-right"> 40 products are available </small></h3>	
-	<hr class="soft"/>
-	<p>
-		Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - that is why our goods are so popular and we have a great number of faithful customers all over the country.
-	</p>
-	<hr class="soft"/>
-	  
-
-<br class="clr"/>
-<div class="tab-content">
-	<div class="tab-pane  active" id="blockView">
-		<ul class="thumbnails" id="content-placeholder">
-		<script id="address-template" type="text/x-handlebars-template">
-				{{#each productInfo}}
-				<li class="span3">
-				  <div class="thumbnail">
-					<a  href="product_details.html"><img src=<c:url value="/resource/images/products/3.jpg"/> alt=""/></a>
-					<div class="caption">
-					  <h5>{{name}}</h5>
-					  <p> 
-						{{description}} 
-					  </p>
-					 
-					  <h4 style="text-align:center"><a class="btn" href="product_details.html?id={{id}}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">{{price}}$</a></h4>
-					</div>
-				  </div>
-				</li>
-				{{/each}}
-			</script>
-		  </ul>
-	<hr class="soft"/>
-	</div>
+	<h3 id="headerCart">  SHOPPING CART [ 3 Item(s) ]<a href="products.html" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
+	<hr class="soft"/>		
+	<table class="table table-bordered" >
+	
+		
+			
+				<thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Description</th>
+                  <th>Quantity/Update</th>
+				  <th>Price</th>
+				</tr>
+              </thead>
+              <tbody id="content-placeholder">
+            <script id="address-template" type="text/x-handlebars-template">
+			{{#each productInfo}}
+                <tr>
+                  <td>{{productName}}</td>
+                  <td>{{description}}</td>
+				  <td>
+					<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button onclick="removeItem({{id}})" class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button>				</div>
+				  </td>
+                  <td>{{price}}</td>
+                </tr>
+			{{/each}}
+		</script>
+              </table> 
+			
+			<table class="table table-bordered" >	
+				
+                <tr>
+                  <td id="grandTotal" colspan="6" style="text-align:right">Total Price:	</td>
+                  
+                  </tr>
+				</tbody>
+				</table>
+           
+		
+		
+            
+	<a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
+	<a href="login.html" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
+	
 </div>
-
-			<br class="clr"/>
-</div>
-</div>
-</div>
+</div></div>
 </div>
 <!-- MainBody End ============================= -->
 <!-- Footer ================================================================== -->
@@ -135,20 +144,23 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
 	<script src=<c:url value="/resource/js/lib/bootstrap.min.js"/>
 		type="text/javascript"></script>
+	<script src=<c:url value="/resource/js/lib/bootshop.js"/>></script>
 	<script src=<c:url value="/resource/js/HacktronicAPI.js"/>
 		type="text/javascript"></script>
 	<script src=<c:url value="/resource/js/commonUI.js"/>
 		type="text/javascript"></script>
-	<script src=<c:url value="/resource/js/productsUI.js"/>
-		type="text/javascript"></script>	
-		
-		<script>
+	<script src=<c:url value="/resource/js/cartUI.js"/>
+		type="text/javascript"></script>
+
+	<script>
 		$(document).ready(function() {
 			loadUserFirstAndLastname();
-			loadProductsByCategory();
+			loadCart();
 		});
-	</script>	
+	</script>
 
+
+	
 
 </body>
 </html>

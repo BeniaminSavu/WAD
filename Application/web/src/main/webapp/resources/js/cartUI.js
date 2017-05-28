@@ -1,4 +1,5 @@
-function loadLatestProducts() {
+function loadCart(){
+	
 	var hacktronicAPI = new HacktronicAPI();
 	hacktronicAPI.setBaseURL("http://localhost:8080");
 	
@@ -9,16 +10,17 @@ function loadLatestProducts() {
 	var theTemplate = Handlebars.compile(theTemplateScript);
 	
 	console.log("test");
-	var request = hacktronicAPI.getLatestProducts();
+	var request = hacktronicAPI.getShoppingCart();
 	request.done(function(data) {
+		console.log(data);
 		var productsInfo = {
 			productInfo : []
 		};
 
-		for ( var i in data) {
-			var item = data[i];
+		for ( var i in data.products) {
+			var item = data.products[i];
 			productsInfo.productInfo.push({
-				"name" : item.name,
+				"productName" : item.name,
 				"description" : item.description,
 				"price" : item.price,
 				"id" : item.id
@@ -27,6 +29,10 @@ function loadLatestProducts() {
 		console.log(productsInfo);
 		var theCompiledHtml = theTemplate(productsInfo);
 		$('#content-placeholder').html(theCompiledHtml);
+		
+		
+		document.getElementById("headerCart").innerHTML = "SHOPPING CART " + data.numberOfProducts + " ITEMS";
+		document.getElementById("grandTotal").innerHTML = "Total price " + data.total + "$";
 
 	}).fail(function(jqXHR, textStatus, errorThrown) {
 
@@ -37,18 +43,16 @@ function loadLatestProducts() {
 			console.error('Houston, we have a problem...');
 		}
 	});
-
 }
 
-function addToCart(productId){
+function removeItem(productId){
 	var hacktronicAPI = new HacktronicAPI();
 	hacktronicAPI.setBaseURL("http://localhost:8080");
-	
+    
 	console.log("test");
-    var request = hacktronicAPI.addToCart(productId);
+    var request = hacktronicAPI.deleteCartItem(productId);
 	request.done(function( data ) {
-		console.log(data);
-		loadShoppingCartMini();
+		
 		
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 
@@ -59,4 +63,6 @@ function addToCart(productId){
 			console.error('Houston, we have a problem...');
 		}
 	});
+	
+	window.location = 'product_summary.html';
 }

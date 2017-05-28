@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -18,7 +19,7 @@ public class TransactionModel extends Model {
 	@JoinColumn(name = "userId")
 	private UserModel user;
 
-	@ManyToMany//(fetch = FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name = "transaction_product", joinColumns = { @JoinColumn(name = "transactionId") }, inverseJoinColumns = {
 			@JoinColumn(name = "productId") })
 	private List<ProductModel> products = new ArrayList<ProductModel>();
@@ -69,14 +70,21 @@ public class TransactionModel extends Model {
 	}
 	
 	public void addTransactionItem(ProductModel product) {
-		if (!products.contains(product)) {
-			products.add(product);
-		}
+
+		products.add(product);
+		
 		updateGrandTotal();
 	}
 
 	public void removeTransactionItem(ProductModel product) {
 		products.remove(product);
+		updateGrandTotal();
+	}
+	
+	public void removeItem(ProductModel product) {
+		while(products.contains(product)){
+			products.remove(product);
+		}
 		updateGrandTotal();
 	}
 

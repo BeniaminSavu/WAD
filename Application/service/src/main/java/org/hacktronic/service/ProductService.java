@@ -13,7 +13,7 @@ public interface ProductService {
 
 	List<ProductModel> findAllProducts();
 
-	List<ProductModel> findProductsByCategory(String category);
+	List<ProductInfo> findProductsByCategory(String category);
 
 	ProductData findProductById(int id);
 

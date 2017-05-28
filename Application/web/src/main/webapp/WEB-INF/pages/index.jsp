@@ -29,9 +29,9 @@
 				</div>
 				<div class="span6">
 					<div class="pull-right">
-						<span class="btn btn-mini">$155.00</span> <a
-							href="product_summary.html"><span
-							class="btn btn-mini btn-primary"><i
+						<span class="btn btn-mini" id="total">$155.00</span> <a
+							href="product_summary.html"><span id="info"
+							class="btn btn-mini btn-primary"><i 
 								class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your
 								cart </span> </a>
 					</div>
@@ -66,21 +66,16 @@
 			<div class="row">
 				<!-- Sidebar ================================================== -->
 				<div id="sidebar" class="span3">
-					<div class="well well-small">
-						<a id="myCart" href="product_summary.html"><img
-							src="themes/images/ico-cart.png" alt="cart">3 Items in your
-							cart <span class="badge badge-warning pull-right">$155.00</span></a>
-					</div>
 					<ul id="sideManu" class="nav nav-tabs nav-stacked">
 						<li class="subMenu open"><a> PRODUCTS </a>
 							<ul>
-								<li><a class="active" href="products.html"><i
+								<li><a class="active" href="products.html?type=camera"><i
 										class="icon-chevron-right"></i>Cameras</a></li>
-								<li><a href="products.html"><i
+								<li><a href="products.html?type=computer"><i
 										class="icon-chevron-right"></i>Computers, Tablets & laptop</a></li>
-								<li><a href="products.html"><i
+								<li><a href="products.html?type=mobile"><i
 										class="icon-chevron-right"></i>Mobile Phone</a></li>
-								<li><a href="products.html"><i
+								<li><a href="products.html?type=sound"><i
 										class="icon-chevron-right"></i>Sound & Vision</a></li>
 							</ul></li>
 					</ul>
@@ -337,7 +332,7 @@
 						{{description}} 
 					  </p>
 					 
-					  <h4 style="text-align:center"><a class="btn" href="product_details.html?id={{id}}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">{{price}}$</a></h4>
+					  <h4 style="text-align:center"><a class="btn" href="product_details.html?id={{id}}"> <i class="icon-zoom-in"></i></a> <a onclick="addToCart({{id}})" class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">{{price}}$</a></h4>
 					</div>
 				  </div>
 				</li>
@@ -375,6 +370,7 @@
 		$(document).ready(function() {
 			loadUserFirstAndLastname();
 			loadLatestProducts();
+			loadShoppingCartMini();
 		});
 	</script>
 
