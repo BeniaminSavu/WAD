@@ -26,4 +26,6 @@ public interface TransactionService {
 	void clearAllProducts();
 
 	void checkout();
+	
+	void removeSameProductsFromTransaction(int productId);
 }

@@ -30,5 +30,15 @@ public class ViewController {
 	public String getProductDetailsPage() {
 		return "product_details";
 	}
+	
+	@RequestMapping("/products.html")
+	public String getProductsPage() {
+		return "products";
+	}
+	
+	@RequestMapping("/product_summary.html")
+	public String getCartPage() {
+		return "cart";
+	}
 }
 

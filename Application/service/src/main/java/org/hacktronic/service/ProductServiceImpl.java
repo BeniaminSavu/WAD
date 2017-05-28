@@ -26,20 +26,30 @@ public class ProductServiceImpl implements ProductService {
 		productRepository.save(product);
 	}
 
-	public List<ProductModel> findProductsByCategory(String category) {
+	public List<ProductInfo> findProductsByCategory(String category) {
 		List<ProductModel> products = productRepository.findByCategory(category);
-		return products;
+		List<ProductInfo> productsInfo = new ArrayList<ProductInfo>();
+
+		for (ProductModel product : products) {
+			ProductInfo productInfo = new ProductInfo();
+			productInfo.setName(product.getName());
+			productInfo.setDescription(product.getDescription());
+			productInfo.setPrice(product.getPrice());
+			productInfo.setId(product.getId());
+			productsInfo.add(productInfo);
+		}
+		return productsInfo;
 	}
 
 	public ProductData findProductById(int id) {
-		ProductModel model =  productRepository.findById(id);
+		ProductModel model = productRepository.findById(id);
 		ProductData product = new ProductData();
 		product.setName(model.getName());
 		product.setDescription(model.getDescription());
 		product.setManufacturer(model.getManufacturer());
 		product.setPrice(model.getPrice());
 		product.setUnitsInStock(model.getUnitsInStock());
-		
+
 		return product;
 	}
 
@@ -57,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductInfo> latestProducts() {
 		List<ProductModel> products = productRepository.findFirst6ByOrderByDateDesc();
 		List<ProductInfo> productsInfo = new ArrayList<ProductInfo>();
-		
+
 		for (ProductModel product : products) {
 			ProductInfo productInfo = new ProductInfo();
 			productInfo.setName(product.getName());
@@ -68,6 +78,5 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return productsInfo;
 	}
-
 
 }

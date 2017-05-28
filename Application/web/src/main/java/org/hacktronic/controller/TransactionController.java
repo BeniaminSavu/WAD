@@ -1,11 +1,18 @@
 package org.hacktronic.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.hacktronic.controller.response.MiniCartResponse;
 import org.hacktronic.persistence.model.ProductModel;
 import org.hacktronic.persistence.model.TransactionModel;
 import org.hacktronic.persistence.model.UserModel;
 import org.hacktronic.service.ProductService;
 import org.hacktronic.service.TransactionService;
 import org.hacktronic.service.UserService;
+import org.hacktronic.service.data.ProductInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,25 +26,48 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/cart")
+@RequestMapping("/hacktronic/cart")
 public class TransactionController {
 
 	@Autowired
 	private TransactionService transactionService;
 	
 	@GetMapping
-	public TransactionModel transaction(Model model) {
+	@Transactional
+	public MiniCartResponse transaction() {
 		TransactionModel transaction = transactionService.getActiveTransaction();
-		return transaction;
+		List<ProductInfo> products = new ArrayList<ProductInfo>();
+		MiniCartResponse response = new MiniCartResponse();
+		response.setNumberOfProducts(transaction.getProducts().size());
+		response.setTotal(transaction.getGrandTotal());
+		for (ProductModel model : transaction.getProducts()) {
+			ProductInfo product = new ProductInfo();
+			product.setDescription(model.getDescription());
+			product.setName(model.getName());
+			product.setPrice(model.getPrice());
+			product.setId(model.getId());
+			products.add(product);
+		}
+		response.setProducts(products);
+		return response;
 	}
 	
-	@PostMapping("add/{productId}")
+	@GetMapping("add/{productId}")
+	@Transactional
 	public String addItem(@PathVariable("productId") int productId) {
 		transactionService.addProductToTransaction(productId);
 		return "dummy";
 	}
 	
-	@DeleteMapping("/remove/{productId}")
+	@GetMapping("/remove/{productId}")
+	@Transactional
+	public String removeSameItem(@PathVariable("productId") int productId) {
+		transactionService.removeSameProductsFromTransaction(productId);
+		return "dummy";
+	}
+	
+	@GetMapping("/remove/one/{productId}")
+	@Transactional
 	public String removeItem(@PathVariable("productId") int productId) {
 		transactionService.removeProductFromTransaction(productId);
 		return "dummy";
