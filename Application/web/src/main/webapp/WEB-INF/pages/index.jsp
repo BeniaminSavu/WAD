@@ -41,8 +41,9 @@
 			<div id="logoArea" class="navbar">
 
 				<div class="navbar-inner">
+				
 					<a class="brand" href="index.html"><img
-						src="themes/images/logo.png" alt="Bootsshop" /></a>
+						src=<c:url value="/resource/images/logo.png"/> alt="Bootsshop" /></a>
 					<form class="form-inline navbar-search" method="post"
 						action="products.html">
 						<input id="srchFld" class="srchTxt" type="text" />

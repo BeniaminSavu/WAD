@@ -107,7 +107,17 @@ function HacktronicAPI() {
 	this.deleteCartItem = function(productId){
 		var apiURL = "/web/hacktronic/cart/remove/" + productId;
 		return doAsyncGet(apiURL);
-	}
+	};
+	
+	this.deleteOneCartItem = function(productId){
+		var apiURL = "/web/hacktronic/cart/remove/one/" + productId;
+		return doAsyncGet(apiURL);
+	};
+	
+	this.checkout = function(){
+		var apiURL = "/web/hacktronic/cart/checkout";
+		return doAsyncGet(apiURL);
+	};
 	
 	HacktronicAPI.instance = this;
 }

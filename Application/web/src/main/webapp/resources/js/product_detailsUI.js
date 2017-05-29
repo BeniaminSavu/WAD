@@ -76,3 +76,28 @@ function loadComments(){
     		$('#content-placeholder').html(theCompiledHtml);
 	});
 }
+
+function addToCart(){
+	var hacktronicAPI = new HacktronicAPI();
+	hacktronicAPI.setBaseURL("http://localhost:8080");
+	var quantity = document.getElementById("quantity").value;
+	var urlParams = new URLSearchParams(window.location.search);
+	var id = urlParams.get('id');
+	
+	console.log(quantity);
+	for(var i=0; i<quantity; i++){
+		var request = hacktronicAPI.addToCart(id);
+		request.done(function( data ) {
+			console.log(data);
+			
+		}).fail(function (jqXHR, textStatus, errorThrown) {
+
+			if (jqXHR.status === 401) { // HTTP Status 401: Unauthorized
+				window.location = 'login.html';
+
+			} else {
+				console.error('Houston, we have a problem...');
+			}
+		});
+	}
+}

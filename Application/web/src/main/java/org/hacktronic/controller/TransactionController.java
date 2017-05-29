@@ -79,7 +79,8 @@ public class TransactionController {
 		return "cart";
 	}
 	
-	@PutMapping("/checkout")
+	@GetMapping("/checkout")
+	@Transactional
 	public String transactionCheckout() {
 		transactionService.checkout();
 		return "cart";

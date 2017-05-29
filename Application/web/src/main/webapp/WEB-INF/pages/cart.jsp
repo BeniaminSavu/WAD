@@ -16,7 +16,6 @@
 	<link href=<c:url value="/resource/css/font-awesome.css"/> rel="stylesheet" type="text/css">
   </head>
 <body>
-<div id="header">
 	<div id="header">
 		<div class="container">
 			<div id="welcomeLine" class="row">
@@ -37,8 +36,9 @@
 			<div id="logoArea" class="navbar">
 
 				<div class="navbar-inner">
+				
 					<a class="brand" href="index.html"><img
-						src="themes/images/logo.png" alt="Bootsshop" /></a>
+						src=<c:url value="/resource/images/logo.png"/> alt="Bootsshop" /></a>
 					<form class="form-inline navbar-search" method="post"
 						action="products.html">
 						<input id="srchFld" class="srchTxt" type="text" />
@@ -95,6 +95,7 @@
                   <th>Description</th>
                   <th>Quantity/Update</th>
 				  <th>Price</th>
+				  <th>Count</th>
 				</tr>
               </thead>
               <tbody id="content-placeholder">
@@ -104,9 +105,10 @@
                   <td>{{productName}}</td>
                   <td>{{description}}</td>
 				  <td>
-					<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button onclick="removeItem({{id}})" class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button>				</div>
+					<div class="input-append"><button class="btn" type="button" onclick="removeOneItem({{id}})"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus" onclick="addToCart({{id}})"></i></button><button onclick="removeItem({{id}})" class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button>				</div>
 				  </td>
                   <td>{{price}}</td>
+					<td>{{count}}</td>
                 </tr>
 			{{/each}}
 		</script>
@@ -125,7 +127,7 @@
 		
             
 	<a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
-	<a href="login.html" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
+	<a href="#" class="btn btn-large pull-right" onclick="checkout()")>Next <i class="icon-arrow-right"></i></a>
 	
 </div>
 </div></div>
@@ -156,6 +158,7 @@
 		$(document).ready(function() {
 			loadUserFirstAndLastname();
 			loadCart();
+			loadShoppingCartMini();
 		});
 	</script>
 

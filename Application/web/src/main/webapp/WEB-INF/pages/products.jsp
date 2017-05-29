@@ -15,7 +15,7 @@
 	<link href=<c:url value="/resource/css/font-awesome.css"/> rel="stylesheet" type="text/css">
   </head>
 <body>
-<div id="header">
+	<div id="header">
 		<div class="container">
 			<div id="welcomeLine" class="row">
 				<div class="span6" id="userFullName">
@@ -23,9 +23,9 @@
 				</div>
 				<div class="span6">
 					<div class="pull-right">
-						<span class="btn btn-mini">$155.00</span> <a
-							href="product_summary.html"><span
-							class="btn btn-mini btn-primary"><i
+						<span class="btn btn-mini" id="total">$155.00</span> <a
+							href="product_summary.html"><span id="info"
+							class="btn btn-mini btn-primary"><i 
 								class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your
 								cart </span> </a>
 					</div>
@@ -35,8 +35,9 @@
 			<div id="logoArea" class="navbar">
 
 				<div class="navbar-inner">
+				
 					<a class="brand" href="index.html"><img
-						src="themes/images/logo.png" alt="Bootsshop" /></a>
+						src=<c:url value="/resource/images/logo.png"/> alt="Bootsshop" /></a>
 					<form class="form-inline navbar-search" method="post"
 						action="products.html">
 						<input id="srchFld" class="srchTxt" type="text" />
@@ -146,6 +147,7 @@
 		$(document).ready(function() {
 			loadUserFirstAndLastname();
 			loadProductsByCategory();
+			loadShoppingCartMini();
 		});
 	</script>	
 

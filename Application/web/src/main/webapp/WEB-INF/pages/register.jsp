@@ -15,57 +15,62 @@
 	<link href=<c:url value="/resource/css/font-awesome.css"/> rel="stylesheet" type="text/css">
   </head>
 <body>
-<div id="header">
-<div class="container">
-<div id="welcomeLine" class="row">
-	<div class="span6"></div>
-	<div class="span6">
-	<div class="pull-right">
-		<span class="btn btn-mini">$155.00</span>
-		<a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a> 
-	</div>
-	</div>
-</div>
-<!-- Navbar ================================================== -->
-<div id="logoArea" class="navbar">
+	<div id="header">
+		<div class="container">
+			<div id="welcomeLine" class="row">
+				<div class="span6" id="userFullName">
+				</div>
+				<div class="span6">
+					<div class="pull-right">
+					</div>
+				</div>
+			</div>
+			<!-- Navbar ================================================== -->
+			<div id="logoArea" class="navbar">
 
-  <div class="navbar-inner">
-    <a class="brand" href="index.html"><img src=<c:url value="/resource/images/logo.png"/> alt="Bootsshop"/></a>
-		<form class="form-inline navbar-search" method="post" action="products.html" >
-		<input id="srchFld" class="srchTxt" type="text" />
-		  <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-		</form>
-    <ul id="topMenu" class="nav pull-right">
-	 <li class=""><a href="normal.html">Delivery</a></li>
-	 <li class=""><a href="contact.html">Contact</a></li>
-	 <li class="">
-	 <a href="login.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-	 </li>
-    </ul>
-  </div>
-</div>
-</div>
-</div>
-<!-- Header End====================================================================== -->
-<div id="mainBody">
-	<div class="container">
-	<div class="row">
-<!-- Sidebar ================================================== -->
-	<div id="sidebar" class="span3">
-		<div class="well well-small"><a id="myCart" href="product_summary.html"><img src=<c:url value="/resource/images/ico-cart.png"/> alt="cart">3 Items in your cart  <span class="badge badge-warning pull-right">$155.00</span></a></div>
-		<ul id="sideManu" class="nav nav-tabs nav-stacked">
-			<li class="subMenu open"><a> PRODUCTS </a>
-				<ul>
-				<li><a class="active" href="products.html"><i class="icon-chevron-right"></i>Cameras</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Computers, Tablets & laptop</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Mobile Phone</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Sound & Vision</a></li>
-				</ul>
-			</li>
-		</ul>
-		<br/>
+				<div class="navbar-inner">
+				
+					<a class="brand" href="index.html"><img
+						src=<c:url value="/resource/images/logo.png"/> alt="Bootsshop" /></a>
+					<form class="form-inline navbar-search" method="post"
+						action="products.html">
+						<input id="srchFld" class="srchTxt" type="text" />
+						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+					</form>
+					<ul id="topMenu" class="nav pull-right">
+						<li class=""><a href="product_new.html">Add Product</a></li>
+						<li class=""><a href="normal.html">Delivery</a></li>
+						<li class=""><a href="contact.html">Contact</a></li>
+						<li class=""><a href="login.html" role="button"
+							style="padding-right: 0"><span
+								class="btn btn-large btn-success">Login</span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
-<!-- Sidebar end=============================================== -->
+	<!-- Header End====================================================================== -->
+	<div id="mainBody">
+		<div class="container">
+			<div class="row">
+				<!-- Sidebar ================================================== -->
+				<div id="sidebar" class="span3">
+					<ul id="sideManu" class="nav nav-tabs nav-stacked">
+						<li class="subMenu open"><a> PRODUCTS </a>
+							<ul>
+								<li><a class="active" href="products.html?type=camera"><i
+										class="icon-chevron-right"></i>Cameras</a></li>
+								<li><a href="products.html?type=computer"><i
+										class="icon-chevron-right"></i>Computers, Tablets & laptop</a></li>
+								<li><a href="products.html?type=mobile"><i
+										class="icon-chevron-right"></i>Mobile Phone</a></li>
+								<li><a href="products.html?type=sound"><i
+										class="icon-chevron-right"></i>Sound & Vision</a></li>
+							</ul></li>
+					</ul>
+					<br />
+				</div>
+				<!-- Sidebar end=============================================== -->
 	<div class="span9">
     <ul class="breadcrumb">
 		<li><a href="index.html">Home</a> <span class="divider">/</span></li>

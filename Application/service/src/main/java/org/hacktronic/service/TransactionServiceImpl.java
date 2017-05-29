@@ -116,6 +116,7 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
+	@Transactional
 	public void removeProductFromTransaction(int productId) {
 		TransactionModel transaction = getActiveTransaction();
 		ProductModel product = productRepository.findById(productId);
